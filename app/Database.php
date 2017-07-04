@@ -41,7 +41,14 @@ class Database
 
     public function query($statement){
         $req = $this->getPDO()->query($statement);
-        $datas = $req->fetchAll(\PDO::FETCH_OBJ);
-        return $datas;
+        return $req->fetchAll(\PDO::FETCH_OBJ);
     }
+
+    public function prepare($statement,Array $bindArr){
+        $req = $this->getPDO()->prepare($statement);
+        $req->execute($bindArr);
+        return $req->fetchAll(\PDO::FETCH_OBJ);
+    }
+
+
 }

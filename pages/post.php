@@ -9,7 +9,7 @@
 if (isset($_GET['n']) && $_GET['n'] !== '') {
     $n = $_GET['n'];
     // fait une query avec l'id envoyé en param
-    $result = $db->query('SELECT * FROM articles where id ='.$n);
+    $result = $db->prepare('SELECT * FROM articles where id = ?', array($n));
 }else {
     // fait une query avec le dernier id
     $result =  $db->query('SELECT * FROM articles ORDER BY id DESC LIMIT 1');
@@ -17,10 +17,10 @@ if (isset($_GET['n']) && $_GET['n'] !== '') {
 
 echo '<div class="row">
         <div class="col s12 m12 l12">
-          <div class="card blue-grey darken-1">
-            <div class="card-content white-text">
-              <span class="card-title">'.$result[0]->titre.'</span>
-              <p>'.$result[0]->contenu.'</p>
+          <div class="card">
+            <div class="card-content">
+              <span class="card-title"><h4>'.$result[0]->titre.'</h4></span>
+              <blockquote>'.$result[0]->contenu.'</blockquote>
             </div>
           </div>
         </div>
