@@ -1,10 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="1cdcfc36-5520-4b7e-bee4-6f280c1121fd" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/blog_ecrivain.iml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/modules.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="" />
+    <list default="true" id="1cdcfc36-5520-4b7e-bee4-6f280c1121fd" name="Default" comment="delete .idea maybe ?">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path=".idea/" />
     <ignored path="config/" />
@@ -327,7 +325,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1499188823387</updated>
-      <workItem from="1499188826511" duration="59000" />
+      <workItem from="1499188826511" duration="523000" />
     </task>
     <task id="LOCAL-00001" summary="delete .idea maybe ?">
       <created>1499188870126</created>
@@ -336,11 +334,18 @@
       <option name="project" value="LOCAL" />
       <updated>1499188870126</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="delete .idea maybe ?">
+      <created>1499188887179</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1499188887179</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="152000" />
+    <option name="totallyTimeSpent" value="616000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
