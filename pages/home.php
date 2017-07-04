@@ -1,7 +1,11 @@
-
-<h1> je suis la home page</h1>
 <?php
 
-$pdo = new PDO('mysql:dbname=blog_ecrivain;host=localhost','root','');
-$count = $pdo->exec('INSERT INTO articles SET titre="Mon Titre", date="'.date('Y-m-d H:i:s').'"');
-var_dump($count);
+    echo '<ul>';
+    foreach ($db->query('SELECT * FROM articles') as $post)  {
+        echo '<li><a href="index.php?p=post&n='.$post->id.'">'. $post->titre .'</a></li>';
+    }
+    echo '</ul>';
+
+
+
+
