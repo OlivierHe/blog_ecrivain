@@ -1,7 +1,7 @@
 <?php
 
-
-    foreach ($db->query('SELECT id, titre, LEFT (contenu, 300) AS contenu FROM articles') as $post)  {
+    // pas de logique sur la vue, pas de query ici, creer l'équivalent de render en class
+    foreach ($data as $post)  {
 
             echo '<div class="row">
                     <div class="col s12 m12 l12">
@@ -11,8 +11,8 @@
                             <blockquote>
                             '.$post->contenu.'...
                             </blockquote>
-                            <div class="card-action">
-                                <a href="index.php?p=post&n='.$post->id.'">Voir le contenu</a>
+                            <div class="card-Action">
+                                <a href="index.php?p=show_post&n='.$post->id.'">Lire l\'article</a>
                             </div>
                          </div>
                         </div>
