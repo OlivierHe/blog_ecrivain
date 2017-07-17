@@ -14,5 +14,22 @@ echo '<div class="row">
               <blockquote>'.$data[0]->contenu.'</blockquote>
             </div>
           </div>
+          </div>
+      </div>
+      <div class="row">
+          <div class="input-field col s6">
+              <input id="pseudo" type="text" class="validate">
+              <label for="pseudo">Pseudonyme</label>
+          </div>
+          <div class="input-field col s6">
+              <input id="email" type="email" class="validate">
+              <label for="email">Courriel</label>
+          </div>
+      </div>
+      <div class="row">
+        <div id="tinymce">
         </div>
-      </div>';
+        <br>
+        <a class="waves-effect waves-light blue btn"><i class="material-icons left">message</i>Ajouter un commentaire</a>
+      </div>
+      ';

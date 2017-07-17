@@ -18,6 +18,25 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <!-- Compiled and minified CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.99.0/css/materialize.min.css">
+    <!-- script -->
+    <script src="https://cloud.tinymce.com/stable/tinymce.min.js?apiKey=6wicdj8y1mi3113p0g6beirmspruhjakl7yy45q8g3y2qqg7"></script>
+    <script>
+        tinymce.init({
+            selector: 'div#tinymce',
+            language_url: 'js/tiny_mce/langs/fr_FR.js',
+            skin_url: "css/jftinymceskin",
+            plugins: [
+                "advlist autolink autosave link image lists charmap print preview hr anchor pagebreak",
+                "searchreplace wordcount visualblocks visualchars code fullscreen insertdatetime media nonbreaking",
+                "table contextmenu directionality emoticons template textcolor paste fullpage textcolor colorpicker textpattern"
+            ],
+            toolbar1: "| undo redo | bold italic underline strikethrough | alignleft aligncenter alignright alignjustify | styleselect formatselect",
+            toolbar2: "cut copy paste | searchreplace | bullist numlist | outdent indent blockquote  | insertdatetime preview | forecolor backcolor",
+            toolbar3: "table | hr removeformat | charmap emoticons | print fullscreen | ltr rtl | visualchars visualblocks nonbreaking pagebreak restoredraft",
+            menubar: false
+        });
+    </script>
+
 </head>
 <body>
 <nav class="light-blue lighten-1" role="navigation">
