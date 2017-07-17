@@ -11,6 +11,9 @@ namespace App;
 
 
 
+use Domain\Database;
+use Responder\HomeResponder;
+
 class Router
 {
 /* router recupère la requete et envoie sur l'action correspondante
@@ -76,7 +79,10 @@ logique :
         } else {
             $actionName = 'Action\\'.ucfirst($action).'Action';
         }
-        new $actionName($this);
+        $responderName = 'Responder\\'.ucfirst($action).'Responder';
+        $goAction = new $actionName($this,new $responderName(),new Database());
+        $goAction();
+
     }
 
 }

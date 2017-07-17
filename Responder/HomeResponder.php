@@ -9,17 +9,17 @@
 namespace Responder;
 
 
-class ReadResponder
+class HomeResponder
 {
     private $data;
 
-    public function __invoke(string $p)
+    public function __invoke()
     {
         $data = $this->data;
         ob_start();
-        require '../Responder/Views/'.$p.'.php';
+        require '../Views/home.php';
         $content = ob_get_clean();
-        require '../Responder/Views/templates/default.php';
+        require '../Views/templates/default.php';
     }
 
     public function setData($data)

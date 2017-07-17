@@ -9,7 +9,7 @@
 return [
     'db_host' => 'localhost',
     'db_user' => 'root',
-    'db_pass' => 'wizard',
+    'db_pass' => '',
     'db_name' => 'blog_ecrivain'
 ];
 

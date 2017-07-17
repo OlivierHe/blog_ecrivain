@@ -29,21 +29,34 @@ class Database
         return $this->pdo;
     }
 
-    public function queryAll($excerpt = false){
-        if ($excerpt) {
-            $req = $this->getPDO()->query('SELECT id, titre, LEFT (contenu, 300) AS contenu FROM articles');
-        } else {
-            $req = $this->getPDO()->query('SELECT * FROM articles');
-        }
+    public function queryAll($tableName)
+    {
+        $req = $this->getPDO()->query('SELECT * FROM ' . $tableName);
         return $req->fetchAll(\PDO::FETCH_OBJ);
     }
 
-    public function query($statement){
+    public function queryAllExcerpt($cols, $colSample, $amountSample, $tableName)
+    {
+        $req = $this->getPDO()->query('SELECT ' . $cols . ', LEFT (' . $colSample . ', ' . $amountSample . ') AS ' . $colSample . ' FROM ' . $tableName);
+        return $req->fetchAll(\PDO::FETCH_OBJ);
+    }
+
+    public function queryBy($tableName, $byCol, $bindArr)
+    {
+        $req = $this->getPDO()->prepare('SELECT * FROM' . $tableName . 'WHERE' . $byCol . '= ?');
+        $req->execute($bindArr);
+        return $req->fetchAll(\PDO::FETCH_OBJ);
+    }
+
+
+    public function query($statement)
+    {
         $req = $this->getPDO()->query($statement);
         return $req->fetchAll(\PDO::FETCH_OBJ);
     }
 
-    public function prepare($statement,array $bindArr){
+    public function prepare($statement, array $bindArr)
+    {
         $req = $this->getPDO()->prepare($statement);
         $req->execute($bindArr);
         return $req->fetchAll(\PDO::FETCH_OBJ);
