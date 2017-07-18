@@ -30,6 +30,6 @@ echo '<div class="row">
         <div id="tinymce">
         </div>
         <br>
-        <a class="waves-effect waves-light blue btn"><i class="material-icons left">message</i>Ajouter un commentaire</a>
+        <a class="waves-effect waves-light blue btn" id="send_com"><i class="material-icons left">message</i>Ajouter un commentaire</a>
       </div>
       ';

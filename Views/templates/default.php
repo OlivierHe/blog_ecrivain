@@ -28,7 +28,7 @@
             plugins: [
                 "advlist autolink autosave link image lists charmap print preview hr anchor pagebreak",
                 "searchreplace wordcount visualblocks visualchars code fullscreen insertdatetime media nonbreaking",
-                "table contextmenu directionality emoticons template textcolor paste fullpage textcolor colorpicker textpattern"
+                "table contextmenu directionality emoticons template textcolor paste textcolor colorpicker textpattern"
             ],
             toolbar1: "| undo redo | bold italic underline strikethrough | alignleft aligncenter alignright alignjustify | styleselect formatselect",
             toolbar2: "cut copy paste | searchreplace | bullist numlist | outdent indent blockquote  | insertdatetime preview | forecolor backcolor",
@@ -101,5 +101,23 @@
 <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
 <!-- Compiled and minified JavaScript -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.99.0/js/materialize.min.js"></script>
+<script>
+    $(document).ready(function(){
+        $("#send_com").click(function(){
+            //console.log($(location).attr('search'));
+            // $.post("reflect.php",
+            //+$(location).attr('search')
+           $.post("index.php"+$(location).attr('search'),
+                {
+                    pseudo: $("#pseudo.validate.valid").val(),
+                    email: $("#email.validate.valid").val(),
+                    comment: tinyMCE.activeEditor.getContent()
+                },
+                function(data,status){
+                console.log("Data: " + data + "\nStatus: " + status);
+            });
+        });
+    });
+</script>
 </body>
 </html>

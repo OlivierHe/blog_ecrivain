@@ -66,6 +66,7 @@ logique :
     {
         $action = $this->request['p'];
         $actionName = null;
+        $responderName = null;
         $underScore = strpos($action, '_');
 
         // supprime les _ et appel l'aciton
@@ -76,10 +77,12 @@ logique :
                $actionPartialName .= ucfirst($oneString);
             }
             $actionName = 'Action\\'.$actionPartialName.'Action';
+            $responderName = 'Responder\\'.$actionPartialName.'Responder';
         } else {
             $actionName = 'Action\\'.ucfirst($action).'Action';
+            $responderName = 'Responder\\'.ucfirst($action).'Responder';
         }
-        $responderName = 'Responder\\'.ucfirst($action).'Responder';
+
         $goAction = new $actionName($this,new $responderName(),new Database());
         $goAction();
 

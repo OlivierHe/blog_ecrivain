@@ -29,30 +29,55 @@ class Database
         return $this->pdo;
     }
 
-    public function queryAll($tableName)
+    public function queryAll($tableName, $order = 'DESC')
     {
-        $req = $this->getPDO()->query('SELECT * FROM ' . $tableName);
+        $req = $this->getPDO()->query(
+            'SELECT * FROM ' . $tableName .
+            ' ORDER BY id ' . $order
+        );
         return $req->fetchAll(\PDO::FETCH_OBJ);
     }
 
-    public function queryAllExcerpt($cols, $colSample, $amountSample, $tableName)
+    public function queryAllExcerpt($cols, $colSample, $amountSample, $tableName, $order = 'DESC')
     {
-        $req = $this->getPDO()->query('SELECT ' . $cols . ', LEFT (' . $colSample . ', ' . $amountSample . ') AS ' . $colSample . ' FROM ' . $tableName);
+        $req = $this->getPDO()->query(
+            'SELECT ' . $cols .
+            ', LEFT (' . $colSample . ', ' . $amountSample .
+            ') AS ' . $colSample .
+            ' FROM ' . $tableName .
+            ' ORDER BY id ' . $order
+        );
         return $req->fetchAll(\PDO::FETCH_OBJ);
     }
 
     public function queryBy($tableName, $byCol, $bindArr)
     {
-        $req = $this->getPDO()->prepare('SELECT * FROM' . $tableName . 'WHERE' . $byCol . '= ?');
+        $req = $this->getPDO()->prepare(
+            'SELECT * FROM ' . $tableName .
+            ' WHERE ' . $byCol .
+            ' = ?'
+        );
         $req->execute($bindArr);
         return $req->fetchAll(\PDO::FETCH_OBJ);
     }
 
-
-    public function query($statement)
+    public function queryOneByMax($tableName, $maxCol)
     {
-        $req = $this->getPDO()->query($statement);
+        $req = $this->getPDO()->query(
+            'SELECT * FROM ' . $tableName .
+            ' WHERE ' . $maxCol .
+            ' = (SELECT MAX(' . $maxCol .
+            ') FROM ' . $tableName . ')');
         return $req->fetchAll(\PDO::FETCH_OBJ);
+    }
+
+    public function insertComment($bindArr)
+    {
+        $req = $this->getPDO()->prepare('INSERT INTO commentaires
+             (article_id,sous_com_id,pseudo,email,content,signale,ip)
+              VALUES (?, ?, ?, ?, ?, ?, ?)');
+        $req->execute($bindArr);
+        echo 'commentaire ajouté';
     }
 
     public function prepare($statement, array $bindArr)

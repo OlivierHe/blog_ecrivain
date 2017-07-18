@@ -27,7 +27,6 @@ class HomeAction
         $this->request = $request;
         $this->db = $db;
         $this->responder = $responder;
-        // var_dump($this->request);
     }
 
     public function __invoke()
