@@ -29,6 +29,7 @@ class Database
         return $this->pdo;
     }
 
+
     public function queryAll($tableName, $order = 'DESC')
     {
         $req = $this->getPDO()->query(
@@ -68,6 +69,12 @@ class Database
             ' WHERE ' . $maxCol .
             ' = (SELECT MAX(' . $maxCol .
             ') FROM ' . $tableName . ')');
+        return $req->fetchAll(\PDO::FETCH_OBJ);
+    }
+
+    public function queryMaxId($tableName){
+        $req = $this->getPDO()->query(
+            'SELECT max(id) As id FROM ' . $tableName );
         return $req->fetchAll(\PDO::FETCH_OBJ);
     }
 

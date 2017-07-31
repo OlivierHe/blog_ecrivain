@@ -23,8 +23,8 @@
     <script>
         tinymce.init({
             selector: 'div#tinymce',
-            language_url: 'js/tiny_mce/langs/fr_FR.js',
-            skin_url: "css/jftinymceskin",
+            language_url: 'http://localhost/blog_ecrivain/js/tiny_mce/langs/fr_FR.js',
+            skin_url: "http://localhost/blog_ecrivain/css/jftinymceskin",
             plugins: [
                 "advlist autolink autosave link image lists charmap print preview hr anchor pagebreak",
                 "searchreplace wordcount visualblocks visualchars code fullscreen insertdatetime media nonbreaking",
@@ -103,11 +103,12 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.99.0/js/materialize.min.js"></script>
 <script>
     $(document).ready(function(){
+        $uri = $(location).attr('pathname');
+        $re = /([a-z_]+)(?:\/)?([0-9]+)?$/mg;
+        $idPost = $re.exec($uri)[2];
+        console.log($idPost);
         $("#send_com").click(function(){
-            //console.log($(location).attr('search'));
-            // $.post("reflect.php",
-            //+$(location).attr('search')
-           $.post("index.php"+$(location).attr('search'),
+           $.post("http://localhost/blog_ecrivain/insert_comment/"+$idPost,
                 {
                     pseudo: $("#pseudo.validate.valid").val(),
                     email: $("#email.validate.valid").val(),

@@ -12,7 +12,7 @@
                             '.$post->contenu.'...
                             </blockquote>
                             <div class="card-Action">
-                                <a href="index.php?p=show_post&n='.$post->id.'">Lire l\'article</a>
+                                <a href="show_post/'.$post->id.'">Lire l\'article</a>
                             </div>
                          </div>
                         </div>
