@@ -15,11 +15,8 @@ class InsertCommentResponder
 
     public function __invoke()
     {
-        $data = $this->data;
-        ob_start();
-        require '../Views/insert_com.php';
-        $content = ob_get_clean();
-        require '../Views/templates/default.php';
+        echo $this->data;
+
     }
 
     public function setData($data)

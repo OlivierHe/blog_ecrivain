@@ -20,9 +20,16 @@ class RoutesChecker
         } elseif ($args_num === 2) {
             $this->value['args'] = $_REQUEST['n'];
             return (is_string($_REQUEST['p']) && ctype_digit($_REQUEST['n']));
-        } else if ($args_num === 3) {
-            $this->value['args'] = [$_REQUEST['n'],$_REQUEST['a']];
-            return (is_string($_REQUEST['p']) && ctype_digit($_REQUEST['n'] ) && ctype_digit($_REQUEST['a'] ));
+        } else if ($args_num === 6) {
+            $this->value['args'] = [$_REQUEST['n'],$_REQUEST['sous_com'],$_REQUEST['pseudo'],$_REQUEST['email'],$_REQUEST['comment']];
+            return (is_string($_REQUEST['p'])
+                && ctype_digit($_REQUEST['n'])
+                && ctype_digit($_REQUEST['sous_com'])
+                && is_string($_REQUEST['pseudo'])
+                && filter_var($_REQUEST['email'], FILTER_VALIDATE_EMAIL)
+                && is_string($_REQUEST['comment'])
+            );
+
         }
         return $nop = false;
     }
@@ -49,7 +56,7 @@ class RoutesChecker
                                 $args_num++;
                             }
                         }
-                        // si bon nombres d'argument on rentre
+                        // si bon nombres d'arguments on rentre
                         if ($value['args_num'] === $args_num) {
                             $this->value = $value;
                             if ($this->controlType($args_num, $value)) {

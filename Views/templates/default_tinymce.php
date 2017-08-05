@@ -20,7 +20,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.99.0/css/materialize.min.css">
 
     <style type="text/css">
-        .card, .card-panel {
+        .card {
             background-color: unset;
             transition: box-shadow .25s;
             border-radius: 10px;
@@ -31,6 +31,7 @@
         }
     </style>
 
+    <!-- script -->
 
 </head>
 <body>
@@ -103,41 +104,8 @@
         $uri = $(location).attr('pathname');
         $re = /([a-z_]+)(?:\/)([0-9]+)$/mg;
         $idPost = $re.exec($uri)[2];
-        $insCom = '<div id="insert_comments">'
-            +'<div class="card-panel">'
-            +'<div class="input-field">'
-            +'<input id="sous_com" type="hidden" value="0">'
-            +'</div>'
-            +'<div class="row">'
-            +'<div class="input-field col s6">'
-            +'<input id="pseudo" type="text" class="validate">'
-            +'<label for="pseudo">Pseudonyme</label>'
-            +'</div>'
-            +'<div class="input-field col s6">'
-            +'<input id="email" type="email" class="validate">'
-            +'<label for="email" data-error="valeur erronée">Courriel</label>'
-            +'</div>'
-            +'</div>'
-            +'<div class="row">'
-            +'<div class="input-field col s12">'
-            +'<textarea id="comment" class="materialize-textarea validate" ></textarea>'
-            +'<label for="comment">Commentaire</label>'
-            +'</div>'
-            +'<br>'
-            +'<a class="waves-effect waves-light blue btn" id="send_com"><i class="material-icons left">message</i>Ajouter un commentaire</a>'
-        +'</div>'
-        +'</div>'
-            +'</div>';
-
+        $comId = "0";
         console.log($idPost);
-
-        function append(elem){
-            $id = $(elem).attr("data-id");
-            if (!$("#insert_comments").length) {
-                $($insCom).appendTo($('#'+$id));
-                $("#sous_com").val($id);
-            }
-        }
 
         function view_com() {
             $.get("http://localhost/blog_ecrivain/view_comment/" + $idPost,
@@ -146,9 +114,8 @@
                 });
         }
 
-        function insert_com() {
-            console.log("dans insert com");
-            if (typeof $("#comment.validate.valid").val() === "undefined") {
+        function insert_com(comId = "0") {
+            if (tinyMCE.activeEditor.getContent() == "") {
                 Materialize.toast('Vous devez remplir un message !', 3000, 'rounded red');
                 return;
             }
@@ -163,30 +130,34 @@
 
             $.post("http://localhost/blog_ecrivain/insert_comment/" + $idPost,
                 {
-                    sous_com: $("#sous_com").val(),
-                    pseudo: $("#pseudo").val(),
-                    email: $("#email").val(),
-                    comment: $("#comment").val(),
+                    sous_com: $("#sous_com").val(comId),
+                    pseudo: $("#pseudo.validate.valid").val(),
+                    email: $("#email.validate.valid").val(),
+                    comment: tinyMCE.activeEditor.getContent(),
                     ip_addr: $("#ip_addr").val()
                 },
                 function (data, status) {
                     Materialize.toast(data, 3000, 'rounded green');
                     view_com();
-                    $("#insert_comments").remove();
                 });
         }
         view_com();
 
-        $(".container").on("click", "#repondre", function (){
-            $("#insert_comments").remove();
-           append($(this));
+        $(".comments").on("click", "#repondre", function (){
+            $id = $(this).attr("data-id");
+            $comId = $id;
+            console.log($comId);
+            $(".insert_comment").appendTo($('#'+$id));
         });
 
-        $(".container").on("click", "#send_com", function (){
-            insert_com();
+        $("#commenter").click(function(){
+            $comId = "0";
+            $(".insert_comment").appendTo($('#0'));
         });
 
-
+        $("#send_com").click(function(){
+            insert_com($comId);
+        });
     });
 </script>
 </body>

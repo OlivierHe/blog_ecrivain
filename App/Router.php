@@ -10,7 +10,7 @@ namespace App;
 
 
 use Domain\Database;
-use Responder\HomeResponder;
+
 
 class Router
 {
@@ -22,7 +22,6 @@ class Router
        $route = new RoutesChecker();
        $path = $route->getPath();
        $this->request = $path['args'];
-        var_dump($path);
 
        $goAction = new $path['action_route']($this,new $path['responder_route'](),new database());
        $goAction();

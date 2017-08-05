@@ -25,36 +25,24 @@ class InsertCommentAction
         Database $db
     )
     {
-        $this->request = $request;
+        $this->request = $request->request;
         $this->db = $db;
         $this->responder = $responder;
     }
 
     public function __invoke()
     {
-        $pseudo = null;
-        $email = null;
-        $comment = null;
-        $sous_com_id = null;
 
-        $param = array('pseudo' => 'Le pseudonyme',
-            'email' => 'L\'email',
-            'comment' => 'Le commentaire'
-        );
+        $article_id = $this->request[0];
+        $sous_com_id = ($this->request[1] === '0') ? null : $this->request[1];
+        $pseudo = $this->request[2] ;
+        $email = $this->request[3];
+        $comment = $this->request[4];
 
-        foreach ($param as $oneParam => $value) {
-            if (isset($_POST[$oneParam]) && $_POST[$oneParam] !== '') {
-                $$oneParam = $_POST[$oneParam];
-            } else {
-                var_dump($value . ' est invalide');
-            }
-        }
+        $this->db->insertComment(array($article_id, $sous_com_id, $pseudo, $email, $comment, 0, $_SERVER['REMOTE_ADDR']));
 
-        //var_dump('post n :'.$_POST['n'].' param n :'.$_PARAM['n']);
-        // useless control
-        if ($pseudo && $email && $comment) {
-            $this->db->insertComment(array($_GET['n'], $sous_com_id, $pseudo, $email, $comment, 0, $_SERVER['REMOTE_ADDR']));
-        }
+        $this->responder->setData('Commentaire ajouté !');
+        return $this->responder->__invoke();
     }
 
 }

@@ -62,6 +62,30 @@ class Database
         return $req->fetchAll(\PDO::FETCH_OBJ);
     }
 
+    public function queryByAndNull($tableName, $byCol, $andCol, $bindArr)
+    {
+        $req = $this->getPDO()->prepare(
+            'SELECT * FROM ' . $tableName .
+            ' WHERE ' . $byCol .
+            ' = ? AND '. $andCol.
+            ' IS NULL '
+        );
+        $req->execute($bindArr);
+        return $req->fetchAll(\PDO::FETCH_OBJ);
+    }
+
+    public function queryByAndNotNull($tableName, $byCol, $andCol, $bindArr)
+    {
+        $req = $this->getPDO()->prepare(
+            'SELECT * FROM ' . $tableName .
+            ' WHERE ' . $byCol .
+            ' = ? AND '. $andCol.
+            ' IS NOT NULL '
+        );
+        $req->execute($bindArr);
+        return $req->fetchAll(\PDO::FETCH_OBJ);
+    }
+
     public function queryOneByMax($tableName, $maxCol)
     {
         $req = $this->getPDO()->query(
@@ -84,7 +108,7 @@ class Database
              (article_id,sous_com_id,pseudo,email,content,signale,ip)
               VALUES (?, ?, ?, ?, ?, ?, ?)');
         $req->execute($bindArr);
-        echo 'commentaire ajouté';
+       // echo 'commentaire ajouté';
     }
 
     public function prepare($statement, array $bindArr)
