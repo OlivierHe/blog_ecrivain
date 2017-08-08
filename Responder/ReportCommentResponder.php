@@ -1,15 +1,14 @@
 <?php
 /**
- * Created by PhpStorm.
- * User: MiniTarlouf
- * Date: 31/07/2017
- * Time: 16:49
+ *  * User: Olivier Herzog
+ * Date: 05/08/2017
+ * Time: 15:19
  */
 
 namespace Responder;
 
 
-class InsertCommentResponder
+class ReportCommentResponder
 {
     private $data;
 

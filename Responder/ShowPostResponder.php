@@ -19,7 +19,9 @@ class ShowPostResponder
         ob_start();
         require '../Views/show_post.php';
         $content = ob_get_clean();
+        $script = '<script src="http://localhost/blog_ecrivain/js/show_post.js"></script>';
         require '../Views/templates/default.php';
+
     }
 
     public function setData($data)

@@ -5,6 +5,7 @@
  * Date: 2017-06-27
  * Time: 21:48
  */
+session_start();
 ?>
 
 <!DOCTYPE html>
@@ -20,174 +21,127 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.99.0/css/materialize.min.css">
 
     <style type="text/css">
+        body {
+            background-image: url("http://localhost/blog_ecrivain/img/nome_alaska.jpg");
+            background-attachment: fixed;
+        }
+
+        .section {
+            min-height: 700px;
+        }
+        /*.parallax-container {
+          height: 300px;
+        }*/
+
         .card, .card-panel {
-            background-color: unset;
+            background : white;
             transition: box-shadow .25s;
             border-radius: 10px;
         }
+
         .comments{
             animation-duration: 0.5s;
             animation-timing-function: ease-in;
         }
+        .btn-floating.btn-large {
+            border: 2px solid white;
+        }
+
+
     </style>
 
 
 </head>
 <body>
-<nav class="light-blue lighten-1" role="navigation">
-    <div class="nav-wrapper container"><a id="logo-container" href="#" class="brand-logo">JF</a>
+<nav class="grey" role="navigation">
+    <div class="nav-wrapper container">
+        <a id="logo-container" href="http://localhost/blog_ecrivain/home" class="btn-floating btn-large waves-effect waves-light grey darken-1 brand-logo">JF</a>
         <ul class="right hide-on-med-and-down">
-            <li><a href="#">Navbar Link</a></li>
+            <li><a href="http://localhost/blog_ecrivain/home"><i class="small material-icons left orange-text text-lighten-3">home</i>Accueil</a></li>
         </ul>
 
         <ul id="nav-mobile" class="side-nav">
-            <li><a href="#">Navbar Link</a></li>
+            <li><a href="http://localhost/blog_ecrivain/home"><i class="small material-icons left">home</i>Accueil</a></li>
         </ul>
         <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
     </div>
 </nav>
+<!--<div class="parallax-container">
+        <div class="parallax"><img src="http://localhost/blog_ecrivain/img/nome_alaska.jpg"></div>
+</div>-->
 <div class="section no-pad-bot" id="index-banner">
     <div class="container">
-<!--  short hand pour echo-->
-       <?= $content ?>
+        <!--  short hand pour echo-->
+        <?= $content ?>
+
         <div class="comments">
         </div>
+
+
     </div>
 </div>
 
 
 
 
-<footer class="page-footer orange">
+<footer class="page-footer grey darken-1">
     <div class="container">
         <div class="row">
             <div class="col l6 s12">
-                <h5 class="white-text">Company Bio</h5>
+                <h5 class="white-text">A propos de l'écrivain</h5>
                 <p class="grey-text text-lighten-4">We are a team of college students working on this project like it's our full time job. Any amount would help support and continue development on this project and is greatly appreciated.</p>
 
 
             </div>
             <div class="col l3 s12">
-                <h5 class="white-text">Settings</h5>
+                <h5 class="white-text">Articles</h5>
                 <ul>
                     <li><a class="white-text" href="#!">Link 1</a></li>
-                    <li><a class="white-text" href="#!">Link 2</a></li>
-                    <li><a class="white-text" href="#!">Link 3</a></li>
-                    <li><a class="white-text" href="#!">Link 4</a></li>
                 </ul>
             </div>
             <div class="col l3 s12">
-                <h5 class="white-text">Connect</h5>
-                <ul>
-                    <li><a class="white-text" href="#!">Link 1</a></li>
-                    <li><a class="white-text" href="#!">Link 2</a></li>
-                    <li><a class="white-text" href="#!">Link 3</a></li>
-                    <li><a class="white-text" href="#!">Link 4</a></li>
-                </ul>
+                <?php
+                $conView;
+
+                if (isset($_SESSION['pseudonyme'])) {
+                    $conView = [
+                        'http://localhost/blog_ecrivain/login_out',
+                        'exit_to_app',
+                        'Deconnexion'
+                    ];
+                } else {
+                    $conView = [
+                        'http://localhost/blog_ecrivain/login_view',
+                        'lock',
+                        'Connexion'
+                    ];
+                }
+                echo '<a class="white-text" href="'.$conView[0].'">
+                        <h5><i class="small material-icons left orange-text text-lighten-3">'.$conView[1].'</i>'.$conView[2].'</h5>
+                      </a>';
+                ?>
+
             </div>
         </div>
     </div>
     <div class="footer-copyright">
         <div class="container">
-            Made by <a class="orange-text text-lighten-3" href="http://materializecss.com">Materialize</a>
+            Made with <a class="orange-text text-lighten-3" href="http://materializecss.com">Materialize</a> By <span class="orange-text text-lighten-3">Olivier Herzog</span>
         </div>
     </div>
 </footer>
 
-<!--  Scripts-->
+<!--  Scripts  -->
 <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
 <!-- Compiled and minified JavaScript -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.99.0/js/materialize.min.js"></script>
-<script>
-    $(document).ready(function(){
-        $uri = $(location).attr('pathname');
-        $re = /([a-z_]+)(?:\/)([0-9]+)$/mg;
-        $idPost = $re.exec($uri)[2];
-        $insCom = '<div id="insert_comments">'
-            +'<div class="card-panel">'
-            +'<div class="input-field">'
-            +'<input id="sous_com" type="hidden" value="0">'
-            +'</div>'
-            +'<div class="row">'
-            +'<div class="input-field col s6">'
-            +'<input id="pseudo" type="text" class="validate">'
-            +'<label for="pseudo">Pseudonyme</label>'
-            +'</div>'
-            +'<div class="input-field col s6">'
-            +'<input id="email" type="email" class="validate">'
-            +'<label for="email" data-error="valeur erronée">Courriel</label>'
-            +'</div>'
-            +'</div>'
-            +'<div class="row">'
-            +'<div class="input-field col s12">'
-            +'<textarea id="comment" class="materialize-textarea validate" ></textarea>'
-            +'<label for="comment">Commentaire</label>'
-            +'</div>'
-            +'<br>'
-            +'<a class="waves-effect waves-light blue btn" id="send_com"><i class="material-icons left">message</i>Ajouter un commentaire</a>'
-        +'</div>'
-        +'</div>'
-            +'</div>';
-
-        console.log($idPost);
-
-        function append(elem){
-            $id = $(elem).attr("data-id");
-            if (!$("#insert_comments").length) {
-                $($insCom).appendTo($('#'+$id));
-                $("#sous_com").val($id);
-            }
-        }
-
-        function view_com() {
-            $.get("http://localhost/blog_ecrivain/view_comment/" + $idPost,
-                function (data) {
-                    $( ".comments" ).html( data ).hide().fadeIn("slow");
-                });
-        }
-
-        function insert_com() {
-            console.log("dans insert com");
-            if (typeof $("#comment.validate.valid").val() === "undefined") {
-                Materialize.toast('Vous devez remplir un message !', 3000, 'rounded red');
-                return;
-            }
-            if (typeof $("#pseudo.validate.valid").val() === "undefined") {
-                Materialize.toast('Vous devez remplir le pseudonyme !', 3000, 'rounded red');
-                return;
-            }
-            if (typeof $("#email.validate.valid").val() === "undefined") {
-                Materialize.toast('L\'adresse email n\'est pas valide !', 3000, 'rounded red');
-                return;
-            }
-
-            $.post("http://localhost/blog_ecrivain/insert_comment/" + $idPost,
-                {
-                    sous_com: $("#sous_com").val(),
-                    pseudo: $("#pseudo").val(),
-                    email: $("#email").val(),
-                    comment: $("#comment").val(),
-                    ip_addr: $("#ip_addr").val()
-                },
-                function (data, status) {
-                    Materialize.toast(data, 3000, 'rounded green');
-                    view_com();
-                    $("#insert_comments").remove();
-                });
-        }
-        view_com();
-
-        $(".container").on("click", "#repondre", function (){
-            $("#insert_comments").remove();
-           append($(this));
+<script type="text/javascript">
+    $(function() {
+        $(".button-collapse").sideNav({
+            closeOnClick: true
         });
-
-        $(".container").on("click", "#send_com", function (){
-            insert_com();
-        });
-
-
     });
 </script>
+<?= $scripts = isset($script) ? $script : ''; ?>
 </body>
 </html>

@@ -1,21 +1,21 @@
 <?php
 /**
- * Created by PhpStorm.
- * User: MiniTarlouf
- * Date: 31/07/2017
- * Time: 16:49
+ *  * User: Olivier Herzog
+ * Date: 07/08/2017
+ * Time: 20:58
  */
 
 namespace Responder;
 
 
-class InsertCommentResponder
+class LoginCheckResponder
 {
     private $data;
 
+
     public function __invoke()
     {
-        echo json_encode($this->data);
+       echo json_encode($this->data);
 
     }
 

@@ -26,8 +26,9 @@ foreach ($data as $comment){
                       <b>' . $comment->pseudo . '</b> - ' . $comment->date . '<br>
                       ' . $comment->content . '
                       </div>
-                          <div class="card-action">
-                          <a class="waves-effect waves-light blue btn" id="repondre" data-id="' . $comment->id . '"><i class="material-icons left">message</i>Répondre</a>
+                          <div class="card-action" style="border-radius: 0 0 10px 10px; background : grey;">
+                          <a class="waves-effect waves-light orange btn" id="repondre" data-id="' . $comment->id . '" ><i class="material-icons left">forum</i>Répondre</a>
+                          <a class="btn-floating tooltipped red right " id="report" data-id="' . $comment->id . '" data-position="bottom" data-delay="50" data-tooltip="Signaler un commentaire"><i class="material-icons">report_problem</i></a>
                           </div>
                        </div>
                      </div>

@@ -41,7 +41,7 @@ class InsertCommentAction
 
         $this->db->insertComment(array($article_id, $sous_com_id, $pseudo, $email, $comment, 0, $_SERVER['REMOTE_ADDR']));
 
-        $this->responder->setData('Commentaire ajouté !');
+        $this->responder->setData(['content' => 'Commentaire ajouté !', 'params' => 'rounded green']);
         return $this->responder->__invoke();
     }
 

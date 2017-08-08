@@ -1,6 +1,5 @@
 <?php
 
-    // pas de logique sur la vue, pas de query ici, creer l'équivalent de render en class
     foreach ($data as $post)  {
 
             echo '<div class="row">

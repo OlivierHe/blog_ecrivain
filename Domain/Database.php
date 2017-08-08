@@ -108,7 +108,18 @@ class Database
              (article_id,sous_com_id,pseudo,email,content,signale,ip)
               VALUES (?, ?, ?, ?, ?, ?, ?)');
         $req->execute($bindArr);
-       // echo 'commentaire ajouté';
+    }
+
+    public function updateOneValueWhere($tableName,$col,$value,$bindArr){
+        $req = $this->getPdo()->prepare(
+            ' UPDATE ' . $tableName .
+            ' SET ' . $col .
+            ' = ' . $col .
+            ' ' . $value .
+            ' WHERE id = ?'
+        );
+        $req->execute($bindArr);
+        // UPDATE commentaires SET signale = signale +1 WHERE id = '14';
     }
 
     public function prepare($statement, array $bindArr)

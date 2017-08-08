@@ -18,7 +18,7 @@ echo '<div class="row">
       </div>
       <div class="row">
           <div class="col">
-            <a class="waves-effect waves-light green btn" id="repondre" data-id="0"><i class="material-icons left">message</i>Commenter l\'article</a>
+            <a class="waves-effect waves-light teal btn" id="repondre" data-id="0"><i class="material-icons left">message</i>Commenter l\'article</a>
           </div>
       </div>
       <div id="0"></div>
