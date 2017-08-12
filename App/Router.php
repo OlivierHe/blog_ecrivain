@@ -18,7 +18,6 @@ class Router
 
     public function callAction()
     {
-
        $route = new RoutesChecker();
        $path = $route->getPath();
        $this->request = $path['args'];

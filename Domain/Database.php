@@ -102,6 +102,11 @@ class Database
         return $req->fetchAll(\PDO::FETCH_OBJ);
     }
 
+    public function insertArticle($bindArr){
+        $req = $this->getPDO()->prepare('INSERT INTO articles (titre,contenu) VALUES (?,?)');
+        $req->execute($bindArr);
+    }
+
     public function insertComment($bindArr)
     {
         $req = $this->getPDO()->prepare('INSERT INTO commentaires

@@ -8,7 +8,7 @@
 namespace Responder;
 
 
-class LoginViewResponder
+class ViewLoginResponder
 {
 
     public function __invoke()

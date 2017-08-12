@@ -13,16 +13,23 @@ class RoutesChecker
 {
     private $value;
 
-    private function controlType($args_num)
+    private function controlType($args_num, $pathName)
     {
+
         if ($args_num === 1) {
             return (is_string($_REQUEST['p']));
         } elseif ($args_num === 2) {
             $this->value['args'] = $_REQUEST['n'];
             return (is_string($_REQUEST['p']) && ctype_digit($_REQUEST['n']));
-        } elseif ($args_num === 4 ) {
-            $this->value['args'] = [$_REQUEST['identifiant'],$_REQUEST['password']];
-            return (is_string($_REQUEST['p']) && ctype_digit($_REQUEST['n']) && is_string($_REQUEST['identifiant']) && is_string($_REQUEST['password']));
+        } elseif ($args_num === 4) {
+            $fieldName = [];
+            if ($pathName === 'login_check') {
+                $fieldName = ['identifiant','password'];
+            }elseif ($pathName === 'insert_article'){
+                $fieldName = ['titre','article'];
+            }
+            $this->value['args'] = [$_REQUEST[$fieldName[0]],$_REQUEST[$fieldName[1]]];
+            return (is_string($_REQUEST['p']) && ctype_digit($_REQUEST['n']) && is_string($_REQUEST[$fieldName[0]]) && is_string($_REQUEST[$fieldName[1]]));
         } else if ($args_num === 6) {
             $this->value['args'] = [$_REQUEST['n'],$_REQUEST['sous_com'],$_REQUEST['pseudo'],$_REQUEST['email'],$_REQUEST['comment']];
             return (is_string($_REQUEST['p'])
@@ -65,7 +72,7 @@ class RoutesChecker
                         // si bon nombres d'arguments on rentre
                         if ($value['args_num'] === $args_num) {
                             $this->value = $value;
-                            if ($this->controlType($args_num)) {
+                            if ($this->controlType($args_num, $key)) {
                                 $go_ahead = $this->value;
                                 break;
                             }

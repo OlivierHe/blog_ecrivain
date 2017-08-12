@@ -1,19 +1,17 @@
 <?php
 /**
  *  * User: Olivier Herzog
- * Date: 07/08/2017
- * Time: 17:01
+ * Date: 11/08/2017
+ * Time: 18:01
  */
 
 namespace Action;
 
-
 use App\Router;
 use Domain\Database;
-use Responder\LoginViewResponder;
+use Responder\ViewEditArticleResponder;
 
-
-class LoginViewAction
+class ViewEditArticleAction
 {
     private $db;
     private $responder;
@@ -21,7 +19,7 @@ class LoginViewAction
 
     public function __construct(
         Router $request,
-        LoginViewResponder $responder,
+        ViewEditArticleResponder $responder,
         Database $db
     )
     {
@@ -32,6 +30,13 @@ class LoginViewAction
 
     public function __invoke()
     {
+        session_start();
+        if ($_SESSION['pseudonyme']) {
+            $this->responder->setData(false);
+        } else {
+            $this->responder->setData(header('Location: http://localhost/blog_ecrivain/error/403'));
+        }
         return $this->responder->__invoke();
+
     }
 }
