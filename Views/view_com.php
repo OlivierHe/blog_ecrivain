@@ -8,7 +8,6 @@
 
 $sous_com_id = [];
 
-
 foreach ($data as $comment){
     echo '<div class="row">';
             if ($comment->sous_com_id) {
@@ -23,7 +22,7 @@ foreach ($data as $comment){
             }
                 echo '<div class="card">
                       <div class="card-content">
-                      <b>' . $comment->pseudo . '</b> - ' . $comment->date . '<br>
+                      <b>' . $comment->pseudo . '</b> - ' . (new DateTime($comment->date))->format('d/m/Y H:i:s') . '<br>
                       ' . $comment->content . '
                       </div>
                           <div class="card-action" style="border-radius: 0 0 10px 10px; background : grey;">

@@ -1,18 +1,18 @@
 <?php
 /**
- *  * User: Olivier Herzog
- * Date: 11/08/2017
- * Time: 18:03
+ * Created by PhpStorm.
+ * User: olivier
+ * Date: 2017-07-17
+ * Time: 23:01
  */
 
 namespace Action;
 
 use App\Router;
 use Domain\Database;
-use Responder\ViewUploadPicResponder;
+use Responder\GetOneArticleResponder;
 
-
-class ViewUploadPicAction
+class GetOneArticleAction
 {
     private $db;
     private $responder;
@@ -20,7 +20,7 @@ class ViewUploadPicAction
 
     public function __construct(
         Router $request,
-        ViewUploadPicResponder $responder,
+        GetOneArticleResponder $responder,
         Database $db
     )
     {
@@ -33,10 +33,12 @@ class ViewUploadPicAction
     {
         session_start();
         if ($_SESSION['type'] === 'ADMIN') {
-            $this->responder->setData(false);
+            $data = $this->db->queryBy('articles', 'id', array($this->request));
+            $this->responder->setData($data);
         } else {
             $this->responder->setData(header('Location: http://localhost/blog_ecrivain/error/403'));
         }
+
         return $this->responder->__invoke();
 
     }

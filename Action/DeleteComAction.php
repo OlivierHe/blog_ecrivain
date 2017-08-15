@@ -1,18 +1,18 @@
 <?php
 /**
  *  * User: Olivier Herzog
- * Date: 11/08/2017
- * Time: 18:03
+ * Date: 14/08/2017
+ * Time: 16:46
  */
 
 namespace Action;
 
 use App\Router;
 use Domain\Database;
-use Responder\ViewUploadPicResponder;
+use Responder\DeleteComResponder;
 
 
-class ViewUploadPicAction
+class DeleteComAction
 {
     private $db;
     private $responder;
@@ -20,7 +20,7 @@ class ViewUploadPicAction
 
     public function __construct(
         Router $request,
-        ViewUploadPicResponder $responder,
+        DeleteComResponder $responder,
         Database $db
     )
     {
@@ -33,12 +33,12 @@ class ViewUploadPicAction
     {
         session_start();
         if ($_SESSION['type'] === 'ADMIN') {
-            $this->responder->setData(false);
-        } else {
+            $this->db->deleteFromWhere('commentaires','id',[$this->request]);
+            $this->responder->setData(['content' => 'Commentaire supprimé !', 'params' => 'rounded green']);
+        }else{
             $this->responder->setData(header('Location: http://localhost/blog_ecrivain/error/403'));
         }
         return $this->responder->__invoke();
-
     }
 
 }

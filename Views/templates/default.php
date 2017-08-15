@@ -29,16 +29,44 @@ if (session_status() === PHP_SESSION_NONE) {
         }
 
         .section {
+            padding-top: 0;
             min-height: 700px;
         }
-        /*.parallax-container {
-          height: 300px;
-        }*/
 
         .card, .card-panel {
             background : white;
             transition: box-shadow .25s;
             border-radius: 10px;
+        }
+
+        .pagination li a {
+            color: white;
+            display: inline-block;
+            font-size: 1.2rem;
+            padding: 0 10px;
+            line-height: 30px;
+        }
+
+
+
+        .pagitop {
+            box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.14), 0 3px 5px -1px rgba(0, 0, 0, 0.3);
+            border-radius: 0 0 10px 10px;
+            margin-top: 0;
+        }
+
+        .pagibot {
+            box-shadow: 0 6px 10px 0 rgba(0,0,0,0.14), 0 1px 18px 0 rgba(0,0,0,0.12), 0 3px 5px -1px rgba(0,0,0,0.3);
+            border-radius: 10px 10px 0 0;
+            margin-top: 1px;
+            margin-bottom: 0;
+        }
+
+        img.responsive-img, video.responsive-video {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 0 auto;
         }
 
         .comments{
@@ -124,7 +152,14 @@ if (session_status() === PHP_SESSION_NONE) {
         <div class="row">
             <div class="col l6 s12">
                 <h5 class="white-text">A propos de l'écrivain</h5>
-                <p class="grey-text text-lighten-4">We are a team of college students working on this project like it's our full time job. Any amount would help support and continue development on this project and is greatly appreciated.</p>
+                <p class="grey-text text-lighten-4">Un professeur nommé Laurent Mellet a écrit un premier livre au sujet de mes romansqui
+                    s'appelle "Les Politiques de l'Intime",et même si j'étais un peu préoccupé à l'idée de le lire et de ce qu'il pouvait
+                    dire,c'est un moment très important pour moi de découvrir que quelqu'un a trouvé dans mes romanssuffisamment
+                    de matière pour rédiger une étude.Cela ajoute d'une certaine manière quelque chose à leur contenu.Mes propres souvenirs
+                    de mes années à l'université, ce que je retiens de plus important de mes études,qui ont eu lieu a Cambridge dans les années
+                    80,étaient l'indépendance intellectuelle, l'indépendance d'esprit, apprendre à penser par soi-même,
+                    ne pas croire tout ce qui nous est dit, que ce soit par les médias,
+                    le gouvernement ou les professeurs d'université.</p>
 
 
             </div>

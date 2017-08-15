@@ -1,18 +1,18 @@
 <?php
 /**
  *  * User: Olivier Herzog
- * Date: 11/08/2017
- * Time: 18:03
+ * Date: 13/08/2017
+ * Time: 12:35
  */
 
 namespace Action;
 
 use App\Router;
 use Domain\Database;
-use Responder\ViewUploadPicResponder;
+use Responder\UpdateArticleResponder;
 
 
-class ViewUploadPicAction
+class UpdateArticleAction
 {
     private $db;
     private $responder;
@@ -20,7 +20,7 @@ class ViewUploadPicAction
 
     public function __construct(
         Router $request,
-        ViewUploadPicResponder $responder,
+        UpdateArticleResponder $responder,
         Database $db
     )
     {
@@ -33,12 +33,14 @@ class ViewUploadPicAction
     {
         session_start();
         if ($_SESSION['type'] === 'ADMIN') {
-            $this->responder->setData(false);
+            $id = $this->request[0];
+            $titre = $this->request[1];
+            $article = $this->request[2];
+            $this->db->updateTwoValueWhere('articles',['titre','contenu'],[$titre,$article,$id]);
+            $this->responder->setData(['content' => 'Article modifié !', 'params' => 'rounded green']);
         } else {
             $this->responder->setData(header('Location: http://localhost/blog_ecrivain/error/403'));
         }
         return $this->responder->__invoke();
-
     }
-
 }

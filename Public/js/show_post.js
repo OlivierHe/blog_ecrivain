@@ -33,7 +33,7 @@ $(document).ready(function(){
         +'</div>'
         +'</div>';
 
-    console.log($idPost);
+
 
     function append(elem){
         $id = $(elem).attr("data-id");
@@ -52,7 +52,6 @@ $(document).ready(function(){
     }
 
     function insert_com() {
-        console.log("dans insert com");
         if (typeof $("#comment.validate.valid").val() === "undefined") {
             Materialize.toast('Vous devez remplir un message !', 3000, 'rounded red');
             return;

@@ -1,18 +1,18 @@
 <?php
 /**
  *  * User: Olivier Herzog
- * Date: 11/08/2017
- * Time: 18:03
+ * Date: 14/08/2017
+ * Time: 16:06
  */
 
 namespace Action;
 
 use App\Router;
 use Domain\Database;
-use Responder\ViewUploadPicResponder;
+use Responder\GetCommentsResponder;
 
 
-class ViewUploadPicAction
+class GetCommentsAction
 {
     private $db;
     private $responder;
@@ -20,11 +20,11 @@ class ViewUploadPicAction
 
     public function __construct(
         Router $request,
-        ViewUploadPicResponder $responder,
+        GetCommentsResponder $responder,
         Database $db
     )
     {
-        $this->request = $request->request;
+        $this->request = $request;
         $this->db = $db;
         $this->responder = $responder;
     }
@@ -33,12 +33,11 @@ class ViewUploadPicAction
     {
         session_start();
         if ($_SESSION['type'] === 'ADMIN') {
-            $this->responder->setData(false);
-        } else {
+            $data = $this->db->queryAll('commentaires', 'signale, pseudo, email, content, ip, date, id ', 'signale');
+            $this->responder->setData($data);
+        }else {
             $this->responder->setData(header('Location: http://localhost/blog_ecrivain/error/403'));
         }
         return $this->responder->__invoke();
-
     }
-
 }

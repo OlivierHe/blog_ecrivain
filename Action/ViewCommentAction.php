@@ -33,20 +33,20 @@ class ViewCommentAction
     public function __invoke()
     {
 
-
         $data = $this->db->queryByAndNull(
             'commentaires',
             'article_id',
             'sous_com_id',
-            array($this->request[0])
+            array($this->request)
         );
 
         $sousCom = $this->db->queryByAndNotNull(
             'commentaires',
             'article_id',
             'sous_com_id',
-            array($this->request[0])
+            array($this->request)
         );
+
 
         rsort($data);
         foreach ($sousCom as $scVal) {

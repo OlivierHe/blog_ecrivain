@@ -35,9 +35,9 @@ class InsertCommentAction
 
         $article_id = $this->request[0];
         $sous_com_id = ($this->request[1] === '0') ? null : $this->request[1];
-        $pseudo = $this->request[2] ;
-        $email = $this->request[3];
-        $comment = $this->request[4];
+        $pseudo = htmlspecialchars($this->request[2]);
+        $email = htmlspecialchars($this->request[3]);
+        $comment = htmlspecialchars($this->request[4]);
 
         $this->db->insertComment(array($article_id, $sous_com_id, $pseudo, $email, $comment, 0, $_SERVER['REMOTE_ADDR']));
 

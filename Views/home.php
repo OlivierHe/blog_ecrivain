@@ -1,9 +1,34 @@
 <?php
 
-    foreach ($data as $post)  {
+function paginatron($data,$color,$pnum){
+    echo '<ul class="pagination '. $color.' center-align '. $pnum .'">';
+    $z = 1;
+    for ($i = 1; $i <= count($data); $i++) {
 
-            echo '<div class="row">
-                    <div class="col s12 m12 l12">
+        if(($i % 3) === 1) {
+
+            if ($z === 1 ){
+                $active = 'active';
+            }else{
+                $active = '';
+            }
+
+            echo '<li class="waves-effect '. $active .'"><a href="#ppp">'.$z.'</a></li>';
+            $z++;
+        }
+    }
+
+    echo '</ul>';
+}
+
+paginatron($data,'grey','pagitop');
+
+
+    foreach ($data as $key => $post)  {
+
+            $hidden = $key >= 3 ? '<div class="row post" hidden data-id="'.$key.'">' : '<div class="row post" data-id="'.$key.'">';
+            echo $hidden;
+            echo '<div class="col s12 m12 l12">
                       <div class="card">
                         <div class="card-content">
                           <span class="card-title"><h4>'. $post->titre .'</h4></span>
@@ -20,6 +45,13 @@
                     ';
 
     }
+
+
+paginatron($data,'grey darken-1','pagibot');
+
+
+
+
 
 
 

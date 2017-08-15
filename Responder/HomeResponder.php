@@ -19,6 +19,7 @@ class HomeResponder
         ob_start();
         require '../Views/home.php';
         $content = ob_get_clean();
+        $script = '<script src="http://localhost/blog_ecrivain/js/home.js"></script>';
         require '../Views/templates/default.php';
     }
 

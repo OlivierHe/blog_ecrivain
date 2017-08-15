@@ -1,11 +1,10 @@
 /**
- *  * Created by Olivier Herzog on 12/08/2017.
+ *  * Created by Olivier Herzog on 14/08/2017.
  */
-
 $(document).ready(function () {
 
 
-    var table = $('#articles').DataTable({
+    var table = $('#com').DataTable({
         "language": {
             "search": "Chercher :",
             "loadingRecords": '<div class="progress  light-blue accent-4" id="loader"> <div class="indeterminate  light-blue lighten-4"></div> </div>',
@@ -18,18 +17,19 @@ $(document).ready(function () {
                 "next": "Suivant"
             }
         },
-        "ajax": "get_articles",
+        "ajax": "get_comments",
         "columns": [
-            {"data": "titre"},
-            {"data": "contenu"},
+            {"data": "signale"},
+            {"data": "pseudo"},
+            {"data": "email"},
+            {"data": "content"},
+            {"data": "ip"},
+            {"data": "date"},
             {"data": "id",
                 "render": function (data) {
-                    return '<a class="btn-floating btn-small waves-effect waves-light green btn-action" href="#" data-idarticle="'
+                    return '<a class="btn-floating btn-small waves-effect waves-light red btn-action" href="#" data-idcom="'
                         + data
-                        + '" data-state="1"><i class="material-icons">edit</i></a>'
-                        + ' <a class="btn-floating btn-small waves-effect waves-light red btn-action" href="#" data-idarticle="'
-                        + data
-                        + '" data-state="2"><i class="material-icons">delete_forever</i></a>';
+                        + '"><i class="material-icons">delete_forever</i></a>';
                 }
             }
         ],
@@ -37,20 +37,17 @@ $(document).ready(function () {
         "info" : true,
         "ordering" : true,
         responsive: true,
-        "lengthMenu": [[3, 5, 10, 20], [3, 5, 10, 20]]
+        "lengthMenu": [[5, 10, 20], [5, 10, 20]],
+        "order": [ 0, 'desc' ]
     });
 
-   $('select').material_select();
+    $('select').material_select();
 
-    $('#articles tbody').on('click', '.btn-action', function () {
-        $idArt = $(this).data("idarticle");
-        $state = $(this).data("state");
-        if ($state === 1) {
-            $(location).attr('href', 'http://localhost/blog_ecrivain/getone_article/' + $idArt);
-        } else{
+    $('#com tbody').on('click', '.btn-action', function () {
+        $idCom = $(this).data("idcom");
             swal({
-                title: 'Etes-vous sûr,',
-                text: "de vouloir supprimer l'article définitivement ?",
+                title: 'Voulez vous,',
+                text: "supprimer le commentaire définitivement, ainsi que ses sous commentaires ?",
                 type: 'warning',
                 showCancelButton: true,
                 confirmButtonText: 'Oui, supprimer le !',
@@ -61,12 +58,12 @@ $(document).ready(function () {
                 showLoaderOnConfirm: true,
                 preConfirm: function (data) {
                     return new Promise(function (resolve) {
-                            $.post("http://localhost/blog_ecrivain/delete_article/" + $idArt,
-                                function (data) {
-                                    table.ajax.reload();
-                                    resolve(data);
-                                }, "json"
-                            );
+                        $.post("http://localhost/blog_ecrivain/delete_comment/" + $idCom,
+                            function (data) {
+                                table.ajax.reload();
+                                resolve(data);
+                            }, "json"
+                        );
                     })
                 },
                 allowOutsideClick: false
@@ -80,14 +77,13 @@ $(document).ready(function () {
                 if (dismiss === 'cancel') {
                     swal(
                         'Annulation',
-                        'L\'article est en sécurité :)',
+                        'Le commentaire est en sécurité :)',
                         'error'
                     )
                 }
             });
-
-        }
     });
 
 });
+
 

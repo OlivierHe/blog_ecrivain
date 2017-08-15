@@ -30,14 +30,17 @@ class Database
     }
 
 
-    public function queryAll($tableName, $order = 'DESC')
+    public function queryAll($tableName,$cols = '*',$orderCol = 'id', $order = 'DESC')
     {
         $req = $this->getPDO()->query(
-            'SELECT * FROM ' . $tableName .
-            ' ORDER BY id ' . $order
+            'SELECT '. $cols .
+            ' FROM ' . $tableName .
+            ' ORDER BY ' . $orderCol.' '. $order
         );
         return $req->fetchAll(\PDO::FETCH_OBJ);
     }
+
+
 
     public function queryAllExcerpt($cols, $colSample, $amountSample, $tableName, $order = 'DESC')
     {
@@ -125,6 +128,24 @@ class Database
         );
         $req->execute($bindArr);
         // UPDATE commentaires SET signale = signale +1 WHERE id = '14';
+    }
+
+    public function updateTwoValueWhere($tableName,$cols,$bindArr){
+        $req = $this->getPdo()->prepare(
+            ' UPDATE ' . $tableName .
+            ' SET ' . $cols[0] . ' =  ? '.
+            ' , ' . $cols[1] . ' =  ? '.
+            ' WHERE id = ? '
+        );
+        $req->execute($bindArr);
+    }
+
+    public function deleteFromWhere($tableName,$col,$bindArr){
+        $req = $this->getPDO()->prepare(
+            ' DELETE FROM ' . $tableName .
+            ' WHERE ' . $col . ' = ? '
+        );
+        $req->execute($bindArr);
     }
 
     public function prepare($statement, array $bindArr)

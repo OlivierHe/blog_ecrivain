@@ -24,7 +24,7 @@ class HomeAction
         Database $db
     )
     {
-        $this->request = $request;
+        $this->request = $request->request;
         $this->db = $db;
         $this->responder = $responder;
     }

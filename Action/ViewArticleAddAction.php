@@ -31,7 +31,7 @@ class ViewArticleAddAction
     public function __invoke()
     {
         session_start();
-        if ($_SESSION['pseudonyme']) {
+        if ($_SESSION['type'] === 'ADMIN') {
             $this->responder->setData(false);
         } else {
             $this->responder->setData(header('Location: http://localhost/blog_ecrivain/error/403'));
