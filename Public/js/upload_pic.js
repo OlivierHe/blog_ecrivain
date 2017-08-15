@@ -18,7 +18,6 @@ $(document).ready(function(){
 
     $("#delete_image").click(function (e){
         if ($("#img_name").val()) {
-            console.log("dans del pic");
             $("#delimg").submit();
         }else{
             Materialize.toast('Vous devez d\'abord cliquer, sur l\'image que vous voulez supprimer', 3000, 'rounded red');

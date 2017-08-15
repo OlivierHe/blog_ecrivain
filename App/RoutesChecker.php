@@ -26,7 +26,7 @@ class RoutesChecker
             return (is_string($_REQUEST['p']) && ctype_digit($_REQUEST['n']) && is_string($_REQUEST['image_delete']));
         } elseif ($args_num === 4) {
             $fieldName = [];
-            if ($pathName === 'login_check') {
+            if ($pathName === 'login_check' || $pathName === 'update_pass') {
                 $fieldName = ['identifiant','password'];
             }elseif ($pathName === 'insert_article') {
                 $fieldName = ['titre', 'article'];

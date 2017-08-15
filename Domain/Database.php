@@ -119,6 +119,7 @@ class Database
     }
 
     public function updateOneValueWhere($tableName,$col,$value,$bindArr){
+        // UPDATE commentaires SET signale = signale +1 WHERE id = '14';
         $req = $this->getPdo()->prepare(
             ' UPDATE ' . $tableName .
             ' SET ' . $col .
@@ -127,7 +128,7 @@ class Database
             ' WHERE id = ?'
         );
         $req->execute($bindArr);
-        // UPDATE commentaires SET signale = signale +1 WHERE id = '14';
+
     }
 
     public function updateTwoValueWhere($tableName,$cols,$bindArr){

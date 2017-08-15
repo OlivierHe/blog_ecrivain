@@ -18,11 +18,11 @@
                     <input id="password" type="password" class="validate">
                     <label for="password"> Mot de passe </label>
                 </div>
-                <div class="col">
-                    <a class="waves-effect waves-light orange btn" id="login">
+
+                    <a class="waves-effect waves-light orange btn col l12 m12 s12" id="login">
                         <i class="material-icons left"> lock_open</i>
                         Se connecter </a>
-                </div>
+
             </div>
         </div>
     </div>

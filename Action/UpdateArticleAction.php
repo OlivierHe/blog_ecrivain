@@ -34,7 +34,7 @@ class UpdateArticleAction
         session_start();
         if ($_SESSION['type'] === 'ADMIN') {
             $id = $this->request[0];
-            $titre = $this->request[1];
+            $titre = htmlspecialchars($this->request[1]);
             $article = $this->request[2];
             $this->db->updateTwoValueWhere('articles',['titre','contenu'],[$titre,$article,$id]);
             $this->responder->setData(['content' => 'Article modifié !', 'params' => 'rounded green']);
