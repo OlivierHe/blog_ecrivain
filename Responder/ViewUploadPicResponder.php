@@ -10,6 +10,8 @@ namespace Responder;
 
 class ViewUploadPicResponder
 {
+    private $data;
+
     public function __invoke()
     {
         $data = $this->data;
@@ -19,7 +21,11 @@ class ViewUploadPicResponder
             ob_start();
             require '../Views/upload_pic.php';
             $content = ob_get_clean();
-            $script = '<script src="http://localhost/blog_ecrivain/js/upload_pic.js"></script>';
+            $script = '<script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.6.8/sweetalert2.min.js"></script>
+                        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.6.8/sweetalert2.min.css">
+                        <!-- Include a polyfill for ES6 Promises (optional) for IE11 and Android browser -->
+                        <script src="https://cdnjs.cloudflare.com/ajax/libs/core-js/2.4.1/core.js"></script>
+                        <script src="http://localhost/blog_ecrivain/js/upload_pic.js"></script>';
             require '../Views/templates/default.php';
         }
     }

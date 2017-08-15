@@ -15,12 +15,15 @@ class RoutesChecker
 
     private function controlType($args_num, $pathName)
     {
-
+        //var_dump($_REQUEST);
         if ($args_num === 1) {
             return (is_string($_REQUEST['p']));
         } elseif ($args_num === 2) {
             $this->value['args'] = $_REQUEST['n'];
             return (is_string($_REQUEST['p']) && ctype_digit($_REQUEST['n']));
+        } elseif ($args_num === 3) {
+            $this->value['args'] = [$_REQUEST['n'],$_REQUEST['image_delete']];
+            return (is_string($_REQUEST['p']) && ctype_digit($_REQUEST['n']) && is_string($_REQUEST['image_delete']));
         } elseif ($args_num === 4) {
             $fieldName = [];
             if ($pathName === 'login_check') {
@@ -52,11 +55,9 @@ class RoutesChecker
     public function getPath()
     {
         $routes_paths = require "Config/routes_paths.php";
-
         if(!isset($_COOKIE['user'])) {
             setcookie('user', '0', time() + 86400, "/");
         }
-
         if (count($_REQUEST) !== 0) {
             $routing = null;
             $args_num = null;
