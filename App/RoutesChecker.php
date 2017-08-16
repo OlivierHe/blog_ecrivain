@@ -15,7 +15,6 @@ class RoutesChecker
 
     private function controlType($args_num, $pathName)
     {
-        //var_dump($_REQUEST);
         if ($args_num === 1) {
             return (is_string($_REQUEST['p']));
         } elseif ($args_num === 2) {
@@ -58,6 +57,7 @@ class RoutesChecker
         if(!isset($_COOKIE['user'])) {
             setcookie('user', '0', time() + 86400, "/");
         }
+        
         if (count($_REQUEST) !== 0) {
             $routing = null;
             $args_num = null;
@@ -78,6 +78,7 @@ class RoutesChecker
                         if ($value['args_num'] === $args_num) {
                             $this->value = $value;
                             if ($this->controlType($args_num, $key)) {
+							
                                 $go_ahead = $this->value;
                                 break;
                             }

@@ -15,7 +15,7 @@ class GetArticlesResponder
     public function __invoke()
     {
         $data = $this->data;
-        echo json_encode(["data" => $data]);
+        echo json_encode(['data' => $data]);
     }
 
     public function setData($data)
