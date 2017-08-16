@@ -52,6 +52,7 @@ $(document).ready(function(){
     }
 
     function insert_com() {
+
         if (typeof $("#comment.validate.valid").val() === "undefined") {
             Materialize.toast('Vous devez remplir un message !', 3000, 'rounded red');
             return;
@@ -60,10 +61,18 @@ $(document).ready(function(){
             Materialize.toast('Vous devez remplir le pseudonyme !', 3000, 'rounded red');
             return;
         }
+
+        $pseudoLow = $("#pseudo").val().toLowerCase();
+        if (jQuery.inArray($pseudoLow, $censure)!==-1) {
+            Materialize.toast('L\'utilisation du pseudonyme, '+$("#pseudo").val()+' sous toutes ses formes, est reservé', 3000, 'rounded red');
+            return;
+        }
+
         if (typeof $("#email.validate.valid").val() === "undefined") {
             Materialize.toast('L\'adresse email n\'est pas valide !', 3000, 'rounded red');
             return;
         }
+
 
         $.post("http://localhost/blog_ecrivain/insert_comment/" + $idPost,
             {

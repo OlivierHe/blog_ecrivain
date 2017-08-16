@@ -16,26 +16,23 @@ class ShowPostAction
 {
     private $db;
     private $responder;
-    private $router;
+    private $request;
 
     public function __construct(
-        Router $router,
+        Router $request,
         ShowPostResponder $responder,
         Database $db
     )
     {
-        $this->router = $router;
+        $this->request = $request->request;
         $this->db = $db;
         $this->responder = $responder;
     }
 
     public function __invoke()
     {
-
-        if (intval($this->router->request) <=
-            intval($this->db->queryMaxId('articles')[0]->id)
-        ){
-            $data = $this->db->queryBy('articles', 'id', array($this->router->request));
+        $data = $this->db->queryBy('articles', 'id', array($this->request));
+       if(count($data)){
             $this->responder->setData($data);
         } else {
             $data[0] = new \stdClass();
