@@ -44,6 +44,8 @@ class GetOneArticleResponder
                                 toolbar3: "table | hr removeformat | charmap emoticons | print fullscreen | ltr rtl | visualchars visualblocks nonbreaking pagebreak restoredraft",
                                 menubar: true,
                                 height : "300",
+                                relative_urls : false,
+                                remove_script_host : false,
                                 init_instance_callback: "insert_contents"
                             });';
             $scriptTop .= "function insert_contents(inst){

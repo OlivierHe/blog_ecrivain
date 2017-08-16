@@ -41,6 +41,8 @@ class ViewArticleAddResponder
                                 toolbar2: "cut copy paste | searchreplace | bullist numlist | outdent indent blockquote  | insertdatetime preview | forecolor backcolor",
                                 toolbar3: "table | hr removeformat | charmap emoticons | print fullscreen | ltr rtl | visualchars visualblocks nonbreaking pagebreak restoredraft",
                                 menubar: true,
+                                relative_urls : false,
+                                remove_script_host : false,
                                 height : "300"
                             });
                         </script>';
