@@ -8,6 +8,7 @@
 namespace Action;
 
 use App\Router;
+use App\Settings;
 use Domain\Database;
 use Responder\UpdateArticleResponder;
 
@@ -17,16 +18,19 @@ class UpdateArticleAction
     private $db;
     private $responder;
     private $request;
+    private $config;
 
     public function __construct(
         Router $request,
         UpdateArticleResponder $responder,
-        Database $db
+        Database $db,
+        Settings $config
     )
     {
         $this->request = $request->request;
         $this->db = $db;
         $this->responder = $responder;
+        $this->config = $config;
     }
 
     public function __invoke()
@@ -39,7 +43,7 @@ class UpdateArticleAction
             $this->db->updateTwoValueWhere('articles',['titre','contenu'],[$titre,$article,$id]);
             $this->responder->setData(['content' => 'Article modifié !', 'params' => 'rounded green']);
         } else {
-            $this->responder->setData(header('Location: http://localhost/blog_ecrivain/error/403'));
+            $this->responder->setData(header('Location: http://'.$this->config->http_host.'/blog_ecrivain/error/403'));
         }
         return $this->responder->__invoke();
     }

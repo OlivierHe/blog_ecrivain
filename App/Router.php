@@ -12,6 +12,7 @@ namespace App;
 use Domain\Database;
 
 
+
 class Router
 {
     public $request;
@@ -22,7 +23,7 @@ class Router
        $path = $route->getPath();
        $this->request = $path['args'];
 
-       $goAction = new $path['action_route']($this,new $path['responder_route'](),new database());
+       $goAction = new $path['action_route']($this,new $path['responder_route'](),new database(new Settings()),new Settings());
        $goAction();
     }
 

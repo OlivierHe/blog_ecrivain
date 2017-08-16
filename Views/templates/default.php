@@ -9,6 +9,9 @@
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
+
+$config = new \App\Settings();
+$http_host = $config->http_host;
 ?>
 
 <!DOCTYPE html>
@@ -24,7 +27,7 @@ if (session_status() === PHP_SESSION_NONE) {
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.99.0/css/materialize.min.css">
     <style type="text/css">
         body {
-            background-image: url("http://localhost/blog_ecrivain/img/nome_alaska.jpg");
+            background-image: url("http://<?= $http_host ?>/blog_ecrivain/img/nome_alaska.jpg");
             background-attachment: fixed;
         }
 
@@ -88,41 +91,41 @@ if (session_status() === PHP_SESSION_NONE) {
 
 <nav class="grey" role="navigation">
     <div class="nav-wrapper container">
-        <a id="logo-container" href="http://localhost/blog_ecrivain/home" class="btn-floating btn-large waves-effect waves-light grey darken-1 brand-logo">JF</a>
+        <a id="logo-container" href="http://<?= $http_host ?>/blog_ecrivain/home" class="btn-floating btn-large waves-effect waves-light grey darken-1 brand-logo">JF</a>
         <ul class="right hide-on-med-and-down">
-            <li><a href="http://localhost/blog_ecrivain/home"><i class="small material-icons left orange-text text-lighten-3">home</i>Accueil</a></li>
+            <li><a href="http://<?= $http_host ?>/blog_ecrivain/home"><i class="small material-icons left orange-text text-lighten-3">home</i>Accueil</a></li>
             <?php if (isset($_SESSION['pseudonyme'])) { ?>
             <li><a class="dropdown-button" href="#!" data-activates="dropdown1"><i class="small material-icons left orange-text text-lighten-3">supervisor_account</i>Administration&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="material-icons right">arrow_drop_down</i></a></li>
             <ul id="dropdown1" class="dropdown-content">
-                <li><a href="http://localhost/blog_ecrivain/ajouter_article"><i class="small material-icons left orange-text text-lighten-3">note_add</i>Ajouter un article</a></li>
+                <li><a href="http://<?= $http_host ?>/blog_ecrivain/ajouter_article"><i class="small material-icons left orange-text text-lighten-3">note_add</i>Ajouter un article</a></li>
                 <li class="divider"></li>
-                <li><a href="http://localhost/blog_ecrivain/editer_article"><i class="small material-icons left orange-text text-lighten-3">edit</i>Editer un article</a></li>
+                <li><a href="http://<?= $http_host ?>/blog_ecrivain/editer_article"><i class="small material-icons left orange-text text-lighten-3">edit</i>Editer un article</a></li>
                 <li class="divider"></li>
-                <li><a href="http://localhost/blog_ecrivain/moderer_commentaires"><i class="small material-icons left orange-text text-lighten-3">gavel</i>Modérations des com..</a></li>
+                <li><a href="http://<?= $http_host ?>/blog_ecrivain/moderer_commentaires"><i class="small material-icons left orange-text text-lighten-3">gavel</i>Modérations des com..</a></li>
                 <li class="divider"></li>
-                <li><a href="http://localhost/blog_ecrivain/televerser_image"><i class="small material-icons left orange-text text-lighten-3">file_upload</i>Téléverser une image</a></li>
+                <li><a href="http://<?= $http_host ?>/blog_ecrivain/televerser_image"><i class="small material-icons left orange-text text-lighten-3">file_upload</i>Téléverser une image</a></li>
                 <li class="divider"></li>
-                <li><a href="http://localhost/blog_ecrivain/parametres"><i class="small material-icons left orange-text text-lighten-3">settings</i>Paramètres</a></li>
+                <li><a href="http://<?= $http_host ?>/blog_ecrivain/parametres"><i class="small material-icons left orange-text text-lighten-3">settings</i>Paramètres</a></li>
             </ul>
             <?php } ?>
         </ul>
 
 
         <ul id="nav-mobile" class="side-nav">
-            <li><a href="http://localhost/blog_ecrivain/home"><i class="small material-icons left orange-text text-lighten-3">home</i>Accueil</a></li>
+            <li><a href="http://<?= $http_host ?>/blog_ecrivain/home"><i class="small material-icons left orange-text text-lighten-3">home</i>Accueil</a></li>
             <li class="divider"></li>
             <?php if (isset($_SESSION['pseudonyme'])) { ?>
             <li><a class="dropdown-button" href="#!" data-activates="dropdown2"><i class="small material-icons left orange-text text-lighten-3">supervisor_account</i>Administration<i class="material-icons right">arrow_drop_down</i></a></li>
             <ul id='dropdown2' class='dropdown-content'>
-                <li><a href="http://localhost/blog_ecrivain/ajouter_article"><i class="small material-icons left orange-text text-lighten-3">note_add</i>Ajouter un article</a></li>
+                <li><a href="http://<?= $http_host ?>/blog_ecrivain/ajouter_article"><i class="small material-icons left orange-text text-lighten-3">note_add</i>Ajouter un article</a></li>
                 <li class="divider"></li>
-                <li><a href="http://localhost/blog_ecrivain/editer_article"><i class="small material-icons left orange-text text-lighten-3">edit</i>Editer un article</a></li>
+                <li><a href="http://<?= $http_host ?>/blog_ecrivain/editer_article"><i class="small material-icons left orange-text text-lighten-3">edit</i>Editer un article</a></li>
                 <li class="divider"></li>
-                <li><a href="http://localhost/blog_ecrivain/moderer_commentaires"><i class="small material-icons left orange-text text-lighten-3">gavel</i>Modérations des com..</a></li>
+                <li><a href="http://<?= $http_host ?>/blog_ecrivain/moderer_commentaires"><i class="small material-icons left orange-text text-lighten-3">gavel</i>Modérations des com..</a></li>
                 <li class="divider"></li>
-                <li><a href="http://localhost/blog_ecrivain/televerser_image"><i class="small material-icons left orange-text text-lighten-3">file_upload</i>Téléverser une image</a></li>
+                <li><a href="http://<?= $http_host ?>/blog_ecrivain/televerser_image"><i class="small material-icons left orange-text text-lighten-3">file_upload</i>Téléverser une image</a></li>
                 <li class="divider"></li>
-                <li><a href="http://localhost/blog_ecrivain/parametres"><i class="small material-icons left orange-text text-lighten-3">settings</i>Paramètres</a></li>
+                <li><a href="http://<?= $http_host ?>/blog_ecrivain/parametres"><i class="small material-icons left orange-text text-lighten-3">settings</i>Paramètres</a></li>
             </ul>
             <?php } ?>
         </ul>
@@ -166,12 +169,12 @@ if (session_status() === PHP_SESSION_NONE) {
             <div class="col l3 s12">
                 <h5 class="white-text">Articles</h5>
                 <ul>
-                    <li><a class="white-text" href="http://localhost/blog_ecrivain/show_post/1">Chapitre I</a></li>
-                    <li><a class="white-text" href="http://localhost/blog_ecrivain/show_post/2">Chapitre II</a></li>
-                    <li><a class="white-text" href="http://localhost/blog_ecrivain/show_post/47">Chapitre III</a></li>
-                    <li><a class="white-text" href="http://localhost/blog_ecrivain/show_post/56">Chapitre IV</a></li>
-                    <li><a class="white-text" href="http://localhost/blog_ecrivain/show_post/57">Chapitre V</a></li>
-                    <li><a class="white-text" href="http://localhost/blog_ecrivain/show_post/58">Chapitre VI</a></li>
+                    <li><a class="white-text" href="http://<?= $http_host ?>/blog_ecrivain/show_post/1">Chapitre I</a></li>
+                    <li><a class="white-text" href="http://<?= $http_host ?>/blog_ecrivain/show_post/2">Chapitre II</a></li>
+                    <li><a class="white-text" href="http://<?= $http_host ?>/blog_ecrivain/show_post/47">Chapitre III</a></li>
+                    <li><a class="white-text" href="http://<?= $http_host ?>/blog_ecrivain/show_post/56">Chapitre IV</a></li>
+                    <li><a class="white-text" href="http://<?= $http_host ?>/blog_ecrivain/show_post/57">Chapitre V</a></li>
+                    <li><a class="white-text" href="http://<?= $http_host ?>/blog_ecrivain/show_post/58">Chapitre VI</a></li>
                 </ul>
             </div>
             <div class="col l3 s12">
@@ -185,7 +188,7 @@ if (session_status() === PHP_SESSION_NONE) {
                     ];
                 } else {
                     $conView = [
-                        'http://localhost/blog_ecrivain/login_view',
+                        'http://'.$http_host.'/blog_ecrivain/login_view',
                         'lock',
                         'Connexion'
                     ];
@@ -208,7 +211,9 @@ if (session_status() === PHP_SESSION_NONE) {
 
 <!-- Compiled and minified JavaScript -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.99.0/js/materialize.min.js"></script>
-<script src="http://localhost/blog_ecrivain/js/defaut.js"></script>
+<script>$http_host = '<?= $http_host ?>'; </script>
+<script src="http://<?= $http_host ?>/blog_ecrivain/js/defaut.js"></script>
+
 <?= $scripts = isset($script) ? $script : ''; ?>
 </body>
 </html>

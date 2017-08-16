@@ -13,7 +13,7 @@ $(document).ready(function(){
             return;
         }
 
-        $.post("http://localhost/blog_ecrivain/insert_article/1",
+        $.post("http://"+$http_host+"/blog_ecrivain/insert_article/1",
             {
                 titre: $("#titre").val(),
                 article: tinyMCE.activeEditor.getContent()

@@ -11,10 +11,12 @@ namespace Responder;
 class GetOneArticleResponder
 {
     private $data;
+    private $config;
 
     public function __invoke()
     {
         $data = $this->data;
+        $http_host = $this->config->http_host;
 
         if ($_SESSION['pseudonyme']) {
             ob_start();
@@ -50,7 +52,7 @@ class GetOneArticleResponder
                         </script>";
 
             $content = ob_get_clean();
-            $script = '<script src="http://localhost/blog_ecrivain/js/getone_article.js"></script>';
+            $script = '<script src="http://'.$http_host.'/blog_ecrivain/js/getone_article.js"></script>';
             require '../Views/templates/default.php';
         } else {
             return $data;
@@ -61,5 +63,10 @@ class GetOneArticleResponder
     public function setData($data)
     {
         $this->data = $data;
+    }
+
+    public function setConfig($config)
+    {
+        $this->config = $config;
     }
 }

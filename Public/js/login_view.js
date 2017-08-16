@@ -12,7 +12,7 @@ $(document).ready(function() {
             return;
         }
 
-        $.post("http://localhost/blog_ecrivain/login_check/666",
+        $.post("http://"+$http_host+"/blog_ecrivain/login_check/666",
             {
                 identifiant: $("#identifiant").val(),
                 password: $("#password").val(),
@@ -22,7 +22,7 @@ $(document).ready(function() {
                 Materialize.toast(data.content, 3000, data.params);
 
                 setTimeout(function(){
-                    $(location).attr('href', 'http://localhost/blog_ecrivain/home');
+                    $(location).attr('href', 'http://'+$http_host+'/blog_ecrivain/home');
                 }, 1000);
             },
             "json"

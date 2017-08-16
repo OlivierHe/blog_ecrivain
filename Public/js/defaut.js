@@ -14,12 +14,12 @@ $(document).ready(function() {
 
     $('#logout').click(function () {
         console.log('logout clicked');
-        $.get("http://localhost/blog_ecrivain/login_out",
+        $.get("http://"+$http_host+"/blog_ecrivain/login_out",
             function (data) {
                 Materialize.toast(data.content, 3000, data.params);
 
                 setTimeout(function () {
-                    $(location).attr('href', 'http://localhost/blog_ecrivain/home');
+                    $(location).attr('href', 'http://'+$http_host+'/blog_ecrivain/home');
                 }, 1000);
             },
             "json"

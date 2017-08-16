@@ -8,6 +8,7 @@
 namespace Action;
 
 use App\Router;
+use App\Settings;
 use Domain\Database;
 use Responder\UpdatePassResponder;
 
@@ -17,16 +18,19 @@ class UpdatePassAction
     private $db;
     private $responder;
     private $request;
+    private $config;
 
     public function __construct(
         Router $request,
         UpdatePassResponder $responder,
-        Database $db
+        Database $db,
+        Settings $config
     )
     {
         $this->request = $request->request;
         $this->db = $db;
         $this->responder = $responder;
+        $this->config = $config;
     }
 
     public function __invoke(){
@@ -39,7 +43,7 @@ class UpdatePassAction
             $this->db->updateTwoValueWhere('login',['identifiant','password_hash'],[$identifiant,$hash,'1']);
             $this->responder->setData(['content' => 'Modification effectuée, Reconnectez vous']);
         }else{
-            $this->responder->setData(header('Location: http://localhost/blog_ecrivain/error/403'));
+            $this->responder->setData(header('Location: http://'.$this->config->http_host.'/blog_ecrivain/error/403'));
         }
         return $this->responder->__invoke();
     }

@@ -46,7 +46,7 @@ $(document).ready(function () {
         $idArt = $(this).data("idarticle");
         $state = $(this).data("state");
         if ($state === 1) {
-            $(location).attr('href', 'http://localhost/blog_ecrivain/getone_article/' + $idArt);
+            $(location).attr('href', 'http://'+$http_host+'/blog_ecrivain/getone_article/' + $idArt);
         } else{
             swal({
                 title: 'Etes-vous sûr,',
@@ -61,7 +61,7 @@ $(document).ready(function () {
                 showLoaderOnConfirm: true,
                 preConfirm: function (data) {
                     return new Promise(function (resolve) {
-                            $.post("http://localhost/blog_ecrivain/delete_article/" + $idArt,
+                            $.post("http://"+$http_host+"/blog_ecrivain/delete_article/" + $idArt,
                                 function (data) {
                                     table.ajax.reload();
                                     resolve(data);

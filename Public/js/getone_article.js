@@ -19,7 +19,7 @@ $(document).ready(function(){
             return;
         }
 
-        $.post("http://localhost/blog_ecrivain/update_article/" + $idPost,
+        $.post("http://"+$http_host+"/blog_ecrivain/update_article/" + $idPost,
             {
                 titre: $("#titre").val(),
                 article: tinyMCE.activeEditor.getContent()
@@ -28,7 +28,7 @@ $(document).ready(function(){
                 Materialize.toast(data.content, 3000, data.params);
 
                 setTimeout(function(){
-                    $(location).attr('href', 'http://localhost/blog_ecrivain/editer_article');
+                    $(location).attr('href', 'http://'+$http_host+'/blog_ecrivain/editer_article');
                 }, 1000);
             },
             "json"

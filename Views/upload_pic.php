@@ -23,7 +23,7 @@ if (isset($_SESSION['message'])) {
     ?>" data-message="<?= $content ?>" data-titre="<?= $titre ?>"></div>
 
 
-    <form action="http://localhost/blog_ecrivain/upload_pic" method="post" enctype="multipart/form-data">
+    <form action="http://<?= $http_host ?>/blog_ecrivain/upload_pic" method="post" enctype="multipart/form-data">
         <div class="row">
             <div class="file-field input-field col s12">
                 <div class="btn">
@@ -41,7 +41,7 @@ if (isset($_SESSION['message'])) {
                 Téléverser une image
             </button>
     </form>
-    <form id="delimg" action="http://localhost/blog_ecrivain/delete_pic/1" method="post">
+    <form id="delimg" action="http://<?= $http_host ?>/blog_ecrivain/delete_pic/1" method="post">
         <input id="img_name" type="hidden" name="image_delete">
         <button class="waves-effect waves-light red btn tooltipped col s12 m4 l3" id="delete_image"
                 data-position="bottom" data-delay="50"
@@ -71,7 +71,7 @@ if (isset($_SESSION['message'])) {
                        echo '<div class="row">';
                    }
                        echo '<div class="col s12 m6 l4">
-                             <img class="responsive-img" data-img="'.$filename.'" src="http://localhost/blog_ecrivain/img/' . $filename . '">
+                             <img class="responsive-img" data-img="'.$filename.'" src="http://'.$http_host.'/blog_ecrivain/img/' . $filename . '">
                            </div>';
 
                    if($row === 3){

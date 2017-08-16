@@ -11,10 +11,12 @@ namespace Responder;
 class InsertArticleResponder
 {
     private $data;
+    private $config;
 
     public function __invoke()
     {
         $data = $this->data;
+        $http_host = $this->config->http_host;
         if (count($data) === 2) {
             echo json_encode($this->data);
         }else {
@@ -26,5 +28,10 @@ class InsertArticleResponder
     public function setData($data)
     {
         $this->data = $data;
+    }
+
+    public function setConfig($config)
+    {
+        $this->config = $config;
     }
 }

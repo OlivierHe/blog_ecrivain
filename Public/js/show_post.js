@@ -44,7 +44,7 @@ $(document).ready(function(){
     }
 
     function view_com() {
-        $.get("http://localhost/blog_ecrivain/view_comment/" + $idPost,
+        $.get("http://"+$http_host+"/blog_ecrivain/view_comment/" + $idPost,
             function (data) {
                 $( ".comments" ).html( data ).hide().fadeIn("slow");
                 $('.tooltipped').tooltip({delay: 50});
@@ -74,7 +74,7 @@ $(document).ready(function(){
         }
 
 
-        $.post("http://localhost/blog_ecrivain/insert_comment/" + $idPost,
+        $.post("http://"+$http_host+"/blog_ecrivain/insert_comment/" + $idPost,
             {
                 sous_com: $("#sous_com").val(),
                 pseudo: $("#pseudo").val(),
@@ -93,7 +93,7 @@ $(document).ready(function(){
 
     function report_com(elem){
         $idPostReport = $(elem).attr("data-id");
-        $.post("http://localhost/blog_ecrivain/report_comment/" + $idPostReport,
+        $.post("http://"+$http_host+"/blog_ecrivain/report_comment/" + $idPostReport,
             function (data) {
                 Materialize.toast(data.content, 3000, data.params);
             },

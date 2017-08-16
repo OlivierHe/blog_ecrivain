@@ -8,6 +8,7 @@
 
 namespace Domain;
 
+use App\Settings;
 
 class Database
 {
@@ -15,9 +16,9 @@ class Database
     private $config;
     private $pdo;
 
-    public function __construct()
+    public function __construct(Settings $config)
     {
-        $this->config = require '../App/Config/config.php';
+        $this->config = $config->config;
     }
 
     private function getPDO(){

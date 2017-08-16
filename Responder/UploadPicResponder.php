@@ -11,13 +11,15 @@ namespace Responder;
 class UploadPicResponder
 {
     private $data;
+    private $config;
 
     public function __invoke()
     {
         $data = $this->data;
+        $http_host = $this->config->http_host;
         if ($_SESSION['type'] === 'ADMIN') {
             $_SESSION['message'] = json_encode($data);
-            return (header('Location: http://localhost/blog_ecrivain/televerser_image'));
+            return (header('Location: http://'.$http_host.'/blog_ecrivain/televerser_image'));
         } else {
             return $data;
         }
@@ -27,4 +29,10 @@ class UploadPicResponder
     {
         $this->data = $data;
     }
+
+    public function setConfig($config)
+    {
+        $this->config = $config;
+    }
+
 }

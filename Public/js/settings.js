@@ -26,7 +26,7 @@ $(document).ready(function () {
             showLoaderOnConfirm: true,
             preConfirm: function (data) {
                 return new Promise(function (resolve) {
-                    $.post("http://localhost/blog_ecrivain/update_pass/666",
+                    $.post("http://"+$http_host+"/blog_ecrivain/update_pass/666",
                         {
                             identifiant: $("#identifiant").val(),
                             password: $("#password").val()

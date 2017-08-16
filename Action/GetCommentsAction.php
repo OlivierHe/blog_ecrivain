@@ -8,6 +8,7 @@
 namespace Action;
 
 use App\Router;
+use App\Settings;
 use Domain\Database;
 use Responder\GetCommentsResponder;
 
@@ -17,16 +18,19 @@ class GetCommentsAction
     private $db;
     private $responder;
     private $request;
+    private $config;
 
     public function __construct(
         Router $request,
         GetCommentsResponder $responder,
-        Database $db
+        Database $db,
+        Settings $config
     )
     {
         $this->request = $request;
         $this->db = $db;
         $this->responder = $responder;
+        $this->config = $config;
     }
 
     public function __invoke()
@@ -36,7 +40,7 @@ class GetCommentsAction
             $data = $this->db->queryAll('commentaires', 'signale, pseudo, email, content, ip, date, id ', 'signale');
             $this->responder->setData($data);
         }else {
-            $this->responder->setData(header('Location: http://localhost/blog_ecrivain/error/403'));
+            $this->responder->setData(header('Location: http://'.$this->config->http_host.'/blog_ecrivain/error/403'));
         }
         return $this->responder->__invoke();
     }
