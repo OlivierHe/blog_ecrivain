@@ -23,17 +23,20 @@ function paginatron($data,$color,$pnum){
 
 paginatron($data,'grey','pagitop');
 
+$cleanContent = new \tidy();
 
     foreach ($data as $key => $post)  {
 
+            $cleanContent->parseString($post->contenu,array('show-body-only'=>true),'utf8');
+            $cleanContent->cleanRepair();
             $hidden = $key >= 3 ? '<div class="row post" hidden data-id="'.$key.'">' : '<div class="row post" data-id="'.$key.'">';
             echo $hidden;
             echo '<div class="col s12 m12 l12">
                       <div class="card">
                         <div class="card-content">
-                          <span class="card-title"><h4>'. $post->titre .'</h4></span>
+                          <span class="card-title"><h3>'. $post->titre .'</h3></span>
                             <blockquote>
-                            '.$post->contenu.'...
+                            '. $cleanContent .'...
                             </blockquote>
                             <div class="card-Action">
                                 <a href="show_post/'.$post->id.'">Lire l\'article</a>

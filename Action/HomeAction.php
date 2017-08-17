@@ -38,6 +38,7 @@ class HomeAction
         $data = $this->db->queryAllExcerpt('id, titre','contenu',300,'articles');
         $this->responder->setConfig($this->config);
         $this->responder->setData($data);
+
         return $this->responder->__invoke();
     }
 }

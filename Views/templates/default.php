@@ -167,14 +167,15 @@ $http_host = $config->http_host;
 
             </div>
             <div class="col l3 s12">
-                <h5 class="white-text">Articles</h5>
+                <h5 class="white-text">Articles récents</h5>
                 <ul>
-                    <li><a class="white-text" href="http://<?= $http_host ?>/blog_ecrivain/show_post/1">Chapitre I</a></li>
-                    <li><a class="white-text" href="http://<?= $http_host ?>/blog_ecrivain/show_post/2">Chapitre II</a></li>
-                    <li><a class="white-text" href="http://<?= $http_host ?>/blog_ecrivain/show_post/47">Chapitre III</a></li>
-                    <li><a class="white-text" href="http://<?= $http_host ?>/blog_ecrivain/show_post/56">Chapitre IV</a></li>
-                    <li><a class="white-text" href="http://<?= $http_host ?>/blog_ecrivain/show_post/57">Chapitre V</a></li>
-                    <li><a class="white-text" href="http://<?= $http_host ?>/blog_ecrivain/show_post/58">Chapitre VI</a></li>
+                    <?php
+                    $db = new \Domain\Database(new \App\Settings());
+                    $links = $db->queryColsOrderLimit('articles','id, titre','10');
+                    foreach ($links as $link) {
+                        echo '<li ><a class="white-text" href = "http://'.$http_host.'/blog_ecrivain/show_post/'.$link->id.'" >'.$link->titre.'</a ></li >';
+                    }
+                    ?>
                 </ul>
             </div>
             <div class="col l3 s12">

@@ -41,6 +41,17 @@ class Database
         return $req->fetchAll(\PDO::FETCH_OBJ);
     }
 
+    public function queryColsOrderLimit($tableName,$cols = '*', $limit,$orderCol = 'id', $order = 'DESC')
+    {
+        $req = $this->getPDO()->query(
+            'SELECT '. $cols .
+            ' FROM ' . $tableName .
+            ' ORDER BY ' . $orderCol.' '. $order.
+            ' LIMIT ' .$limit
+        );
+        return $req->fetchAll(\PDO::FETCH_OBJ);
+    }
+
 
 
     public function queryAllExcerpt($cols, $colSample, $amountSample, $tableName, $order = 'DESC')
