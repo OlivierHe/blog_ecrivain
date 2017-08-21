@@ -37,7 +37,7 @@ class InsertArticleAction
     {
         session_start();
         if ($_SESSION['pseudonyme']) {
-            $titre = $this->request[0];
+            $titre = htmlspecialchars($this->request[0]);
             $article = $this->request[1];
 
             $this->db->InsertArticle([$titre,$article]);
